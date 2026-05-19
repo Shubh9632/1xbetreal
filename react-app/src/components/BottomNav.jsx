@@ -12,9 +12,27 @@ export default function BottomNav() {
       if (!nav) {
         nav = document.createElement('div');
         nav.className = 'bottom-nav';
+        document.body.appendChild(nav);
+      }
+      
+      // Find login modal elements
+      const loginElements = document.querySelectorAll('ion-modal, .login-wrapper, .login-form, .login-header-section');
+      let isLoginVisible = false;
+      
+      for (let i = 0; i < loginElements.length; i++) {
+        const el = loginElements[i];
+        const style = window.getComputedStyle(el);
+        if (style.display !== 'none' && style.opacity !== '0' && style.visibility !== 'hidden') {
+          isLoginVisible = true;
+          break;
+        }
+      }
+
+      if (isLoginVisible) {
+        nav.style.cssText = 'display:none !important;';
+      } else {
         nav.style.cssText =
           'position:fixed; bottom:0; left:0; width:100%; height:65px; background-color:#4a90e2 !important; display:flex; justify-content:space-around; align-items:center; z-index:999999 !important; padding-bottom:env(safe-area-inset-bottom, 10px); box-sizing:content-box; box-shadow:0 -2px 10px rgba(0,0,0,0.2);';
-        document.body.appendChild(nav);
       }
 
       if (isLogged) {
@@ -38,7 +56,7 @@ export default function BottomNav() {
             <i class="fa fa-user-plus" style="font-size:20px; margin-bottom:4px;"></i>
             Referral
           </a>
-          <a href="#" class="bottom-nav-item" onclick="showDepositWithdrawReport(event)" style="display:flex; flex-direction:column; align-items:center; color:rgba(255,255,255,0.7) !important; text-decoration:none; font-size:10px; min-width:60px;">
+          <a href="#" class="bottom-nav-item" onclick="showPassbook(event)" style="display:flex; flex-direction:column; align-items:center; color:rgba(255,255,255,0.7) !important; text-decoration:none; font-size:10px; min-width:60px;">
             <i class="fa fa-book" style="font-size:20px; margin-bottom:4px;"></i>
             Passbook
           </a>

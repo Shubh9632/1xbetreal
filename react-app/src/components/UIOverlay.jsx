@@ -32,7 +32,7 @@ export default function UIOverlay() {
           logo.style.width = 'auto';
           if (logo.parentElement.tagName !== 'A') {
             const link = document.createElement('a');
-            link.href = 'https://1xbetreal.com/';
+            link.href = '/';
             link.style.cssText = 'text-decoration:none;display:flex;align-items:center;';
             logo.parentNode.insertBefore(link, logo);
             link.appendChild(logo);
